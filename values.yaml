@@ -1,5 +1,5 @@
 config:
   infra-mgmt-eks-cluster:cluster:
-    mateus: hehe
+    any-key: any-value
     placement:
-      region: regiaotop
+      region: us-east-1
