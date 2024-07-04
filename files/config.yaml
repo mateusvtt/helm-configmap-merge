@@ -1,0 +1,6 @@
+infra-mgmt-eks-cluster:cluster:
+  placement:
+    accountAlias: dev
+    accountId: "123456789012"
+    environment: "staging"
+    region: us-east-1

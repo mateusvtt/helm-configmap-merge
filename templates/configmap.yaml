@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  stack-config: |
+{{ toYaml (mergeOverwrite (fromYaml (.Files.Get "files/config.yaml")) .Values.config) | indent 4 }}

@@ -1,0 +1,5 @@
+config:
+  infra-mgmt-eks-cluster:cluster:
+    mateus: hehe
+    placement:
+      region: regiaotop

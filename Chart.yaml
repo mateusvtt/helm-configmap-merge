@@ -1,0 +1,8 @@
+apiVersion: v2
+name: config-stack
+description: Helm to handle pulumi config stack
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+sources:
+  - https://github.com/mateusvtt/helm-configmap-merge
