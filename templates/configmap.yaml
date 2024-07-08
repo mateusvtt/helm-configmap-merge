@@ -1,7 +1,22 @@
+{{- $remoteConfigMap := dict -}}
+{{- if .Values.configMap -}}
+{{- range .Values.configMap -}}
+{{- $configMapName := .name -}}
+{{- $keys := .keys -}}
+{{- $configMap := (lookup "v1" "ConfigMap" "default" $configMapName) -}}
+{{- range $k, $v := $configMap.data -}}
+{{- if has $k $keys -}}
+{{- $_ := set $remoteConfigMap $k $v -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end }}
+
+{{- $mergedValues := mergeOverwrite .Values.config (fromYaml (.Files.Get "files/config.yaml")) -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
   stack-config: |
-{{ toYaml (mergeOverwrite (fromYaml (.Files.Get "files/config.yaml")) .Values.config) | indent 4 }}
+{{ toYaml (mergeOverwrite $mergedValues $remoteConfigMap) | indent 4 }}
