@@ -1,4 +1,4 @@
-{{- $clusterMeta := dict -}}
+{{- $remoteConfigMap := dict -}}
 {{- if .Values.configMap -}}
 {{- range .Values.configMap -}}
 {{- $configMapName := .name -}}
@@ -6,7 +6,7 @@
 {{- $configMap := (lookup "v1" "ConfigMap" "default" $configMapName) -}}
 {{- range $k, $v := $configMap.data -}}
 {{- if has $k $keys -}}
-{{- $_ := set $clusterMeta $k $v -}}
+{{- $_ := set $remoteConfigMap $k $v -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -19,4 +19,4 @@ metadata:
   name: {{ .Release.Name }}-config
 data:
   stack-config: |
-{{ toYaml (mergeOverwrite $mergedValues $clusterMeta) | indent 4 }}
+{{ toYaml (mergeOverwrite $mergedValues $remoteConfigMap) | indent 4 }}
