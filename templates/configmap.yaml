@@ -12,10 +12,11 @@
 {{- end -}}
 {{- end }}
 
+{{- $mergedValues := mergeOverwrite (fromYaml (.Files.Get .Values.baseConfigPath)) .Values.config -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
   stack-config: |
-{{ toYaml (mergeOverwrite .Values.config $remoteConfigMap) | indent 4 }}
+{{ toYaml (mergeOverwrite $mergedValues $remoteConfigMap) | indent 4 }}

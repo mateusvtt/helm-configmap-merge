@@ -1,3 +1,4 @@
+baseConfigPath: ""
 config:
   infra-mgmt-eks-cluster:cluster:
     any-key: any-value
